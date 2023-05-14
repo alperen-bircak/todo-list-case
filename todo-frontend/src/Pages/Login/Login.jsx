@@ -9,13 +9,13 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [errorText, setErrorText] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(["jwt-token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["jwt_token"]);
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     try {
       const res = await axios.post(getAPIUrl() + "/login", values);
-      setCookie("jwt-token", res.data.token, {
+      setCookie("jwt_token", res.data.token, {
         path: "/",
         sameSite: true,
       });

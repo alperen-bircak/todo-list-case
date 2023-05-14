@@ -1,0 +1,13 @@
+@import "src/global";
+
+
+.todo-view {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  background-color: $color-light;
+  border-radius: $border-radius;
+  width: 100vw;
+  max-width: 900px;
+  padding: 15px;
+  min-height: 50px;
+}

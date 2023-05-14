@@ -1,0 +1,16 @@
+@import "src/global";
+
+.todo-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .todo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 30px;
+
+
+  }
+}

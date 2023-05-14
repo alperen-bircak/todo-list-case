@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { CookiesProvider } from "react-cookie";
+import { Cookies, CookiesProvider } from "react-cookie";
 import {
   createBrowserRouter,
   redirect,
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     loader: ({ request }) => {
       const url = new URL(request.url);
       if (url.pathname === "/") {
-        return redirect("/login");
+        return redirect("/todo");
       }
     },
   },
