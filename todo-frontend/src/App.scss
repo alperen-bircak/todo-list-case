@@ -1,0 +1,10 @@
+@import "src/color"
+
+body {
+    background: $color-bg;
+}
+
+* {
+    box-sizing: border-box;
+}
+  
