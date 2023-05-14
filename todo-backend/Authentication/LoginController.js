@@ -13,13 +13,13 @@ import getSecretKey from "../Utilities/SecretKey.js";
 
 const Login = async (req, res, next) => {
   try {
-    const { userName, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!(userName && password)) {
+    if (!(username && password)) {
       throw Error(StatusCodes.BAD_REQUEST, "Username and password required");
     }
 
-    const user = await User.findOne({ username: userName }).select(
+    const user = await User.findOne({ username: username }).select(
       "username password_hash"
     );
 
@@ -39,10 +39,7 @@ const Login = async (req, res, next) => {
       .setExpirationTime(process.env.JWT_EXPIRATION_TIME)
       .sign(secretKey);
 
-    const userRes = user.toObject();
-    userRes.password_hash = undefined;
-    userRes.token = token;
-    res.status(201).json(userRes);
+    res.status(201).json({ token: token, username: user.username });
   } catch (error) {
     next(error);
   }

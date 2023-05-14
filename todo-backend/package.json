@@ -7,7 +7,7 @@
   "scripts": {
     "test": "npm run test",
     "dev": "nodemon index.js",
-    "start": "node indej.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

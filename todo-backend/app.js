@@ -3,8 +3,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import startDatabaseConnection from "./database.js";
 import router from "./routes.js";
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
+import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config();
 const app = express();
 
 app.use(cors());
@@ -18,16 +18,14 @@ const baseUrl = process.env.BASE_URL || "/api/v1";
 app.use(baseUrl, router);
 
 app.use((err, req, res, next) => {
-    console.error(err.stack);
+  console.error(err.stack);
 
-    const statusCode = err.statusCode || 500;
-    const message = err.message || 'Internal Server Error';
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
 
-    res.status(statusCode).json({
-        error: {
-            message,
-        },
-    });
-})
+  res.status(statusCode).json({
+    message,
+  });
+});
 
 export default app;
