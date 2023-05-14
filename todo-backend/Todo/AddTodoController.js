@@ -8,7 +8,7 @@ import {
 import { Error } from "../Utilities/UtilityFunctions.js";
 import mongoose from "mongoose";
 
-const AddNote = async (req, res, next) => {
+const AddTodo = async (req, res, next) => {
   try {
     const { todo_body } = req.body;
     if (!todo_body) {
@@ -38,4 +38,4 @@ const AddNote = async (req, res, next) => {
   }
 };
 
-export default AddNote;
+export default AddTodo;
