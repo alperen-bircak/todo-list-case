@@ -9,6 +9,7 @@ import User from "../Schemas/UserSchema.js";
 import bcrypt from "bcrypt";
 import { createSecretKey } from "crypto";
 import { SignJWT } from "jose";
+import getSecretKey from "../Utilities/SecretKey.js";
 
 const Login = async (req, res, next) => {
   try {
@@ -31,7 +32,7 @@ const Login = async (req, res, next) => {
       throw Error(StatusCodes.UNAUTHORIZED, "Wrong username or password");
     }
 
-    const secretKey = createSecretKey(process.env.JWT_SECRET, "utf-8");
+    const secretKey = getSecretKey();
     const token = await new SignJWT({ _id: user._id })
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()

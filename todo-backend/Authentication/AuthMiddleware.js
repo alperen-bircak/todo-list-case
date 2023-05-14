@@ -8,6 +8,7 @@ import {
 import { createSecretKey } from "crypto";
 import { jwtVerify } from "jose";
 import User from "../Schemas/UserSchema.js";
+import getSecretKey from "../Utilities/SecretKey.js";
 const Auth = async (req, res, next) => {
   try {
     const authHeader = req.header("Authorization");
@@ -20,11 +21,15 @@ const Auth = async (req, res, next) => {
     }
 
     const token = authHeader.replace("Bearer ", "");
-    const secretKey = createSecretKey(process.env.JWT_SECRET, "utf-8");
+    const secretKey = getSecretKey();
 
     const { payload, protectedHeader } = await jwtVerify(token, secretKey);
 
-    const user = await User.findById(payload._id);
+    if (!payload.exp || Date.now() >= payload.exp * 1000) {
+      throw Error(StatusCodes.UNAUTHORIZED, "expired token");
+    }
+
+    const user = await User.findById(payload._id).select("username");
     if (!user) {
       throw Error(StatusCodes.UNAUTHORIZED, "user does not exist");
     }
