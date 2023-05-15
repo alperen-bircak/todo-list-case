@@ -6,11 +6,15 @@
   display: flex;
 
   width: 100%;
-  padding: 15px;
   min-height: 100px;
   position: relative;
   align-items: stretch;
   justify-content: space-between;
+
+  .todo-body {
+    margin: 15px;
+
+  }
 
 
   .buttons {
