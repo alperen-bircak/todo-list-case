@@ -100,16 +100,32 @@ const Todo = () => {
       return;
     }
 
-    queryClient.setQueryData(["todos"], {
+    const newTodos = {
       ...data,
       todo_list: reorder(
         data.todo_list,
         result.source.index,
         result.destination.index
       ),
-    });
+    };
+    queryClient.setQueryData(["todos"], newTodos);
+    reorderTodos.mutate(newTodos.todo_list.map((item) => item._id));
   };
 
+  const reorderTodos = useMutation(
+    async (todo_id_list) => {
+      return await axiosAuth.current.put("/todo/reorder", {
+        todo_id_list: todo_id_list,
+      });
+    },
+    {
+      onSuccess: (data, variables, context) => {
+        queryClient.setQueryData(["todos"], data.data);
+      },
+
+      onError: handleError,
+    }
+  );
   return (
     <div className="todo-page">
       <div className="center-box">

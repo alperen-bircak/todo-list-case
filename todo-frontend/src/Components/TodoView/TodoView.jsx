@@ -12,7 +12,7 @@ const TodoView = ({ todo, instance, checked, onError }) => {
 
   const deleteItem = useMutation(
     async () => {
-      return await instance.delete("/todo", { todo_id: todo._id });
+      return await instance.delete("/todo", { params: { todo_id: todo._id } });
     },
     {
       onSuccess: (data, variables, context) => {

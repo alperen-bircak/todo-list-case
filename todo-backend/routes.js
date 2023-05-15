@@ -7,6 +7,7 @@ import GetTodos from "./Todo/GetTodosController.js";
 import DeleteTodo from "./Todo/DeleteTodoController.js";
 import ModifyTodo from "./Todo/ModifyTodoController.js";
 import CheckTodo from "./Todo/CheckTodoController.js";
+import ReorderTodo from "./Todo/ReorderTodoController.js";
 const router = express.Router();
 
 router.post("/register", Register);
@@ -18,5 +19,6 @@ router.delete("/todo", Auth, DeleteTodo);
 router.put("/todo", Auth, ModifyTodo);
 
 router.put("/todo/check", Auth, CheckTodo);
+router.put("/todo/reorder", Auth, ReorderTodo);
 
 export default router;
