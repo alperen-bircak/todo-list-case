@@ -5,6 +5,7 @@ import Register from "./Authentication/RegisterController.js";
 import HelloWorld from "./Test/TestController.js";
 import AddTodo from "./Todo/AddTodoController.js";
 import GetTodos from "./Todo/GetTodosController.js";
+import DeleteTodo from "./Todo/DeleteTodoController.js";
 const router = express.Router();
 
 router.post("/register", Register);
@@ -12,6 +13,7 @@ router.post("/login", Login);
 
 router.post("/todo", Auth, AddTodo);
 router.get("/todo", Auth, GetTodos);
+router.delete("/todo", Auth, DeleteTodo);
 
 router.get("/test", Auth, HelloWorld);
 export default router;
