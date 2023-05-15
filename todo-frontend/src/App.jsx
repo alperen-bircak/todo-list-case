@@ -1,3 +1,4 @@
+import { DragDropContext } from "@hello-pangea/dnd";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Cookies, CookiesProvider } from "react-cookie";
 import {
