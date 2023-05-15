@@ -6,6 +6,7 @@ import { getAPIUrl } from "../../Utilities/UtilityFunctions";
 import axios from "axios";
 import "./Todo.scss";
 import TodoView from "../../Components/TodoView/TodoView";
+import TodoForm from "../../Components/TodoForm/TodoForm";
 
 const Todo = () => {
   const [cookies] = useCookies(["jwt-token"]);
@@ -28,6 +29,7 @@ const Todo = () => {
 
   return (
     <div className="todo-page">
+      <TodoForm />
       <div className="todo-container">
         {data?.data?.map((item) => (
           <TodoView todo={item} />

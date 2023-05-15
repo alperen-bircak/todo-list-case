@@ -1,0 +1,32 @@
+@import "src/global";
+
+
+.todo-form {
+  @extend %box;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+
+  width: 100vw;
+  max-width: 900px;
+  padding: 15px;
+  min-height: 100px;
+
+  .todo-form-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto) 60px;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    grid-template-areas:
+      "bod bod bod ."
+      "bod bod bod btn";
+
+    .form-body {
+      grid-area: bod;
+    }
+
+    .form-button {
+      grid-area: btn;
+    }
+  }
+}

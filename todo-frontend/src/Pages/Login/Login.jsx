@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Login.scss";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { useForm } from "react-hook-form";
 import { getAPIUrl } from "../../Utilities/UtilityFunctions";
 import axios from "axios";
 import { useCookies } from "react-cookie";
