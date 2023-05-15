@@ -7,5 +7,27 @@
 
   width: 100%;
   padding: 15px;
-  min-height: 50px;
+  min-height: 100px;
+  position: relative;
+  align-items: stretch;
+  justify-content: space-between;
+
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    right: 0;
+    width: 40px;
+    opacity: 50%;
+    transition: opacity 0.2s;
+
+    @media only screen and (max-width: 900px) {
+      opacity: 100%;
+    }
+
+    &:hover {
+      opacity: 100%;
+    }
+  }
 }

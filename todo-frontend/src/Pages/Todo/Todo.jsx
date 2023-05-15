@@ -36,7 +36,6 @@ const Todo = () => {
     },
     {
       onSuccess: (data, variables, context) => {
-        queryClient.setQueryData(["todos"], data.data);
         queryClient.invalidateQueries(["todos"]);
       },
     }
@@ -76,7 +75,7 @@ const Todo = () => {
 
         <div className="todo-container">
           {data?.data?.map((item) => (
-            <TodoView key={item._id} todo={item} />
+            <TodoView key={item._id} todo={item} instance={axiosAuth.current} />
           ))}
         </div>
       </div>
