@@ -20,9 +20,14 @@ const AddTodo = async (req, res, next) => {
       {
         $push: {
           todo_list: {
-            _id: new mongoose.Types.ObjectId(),
-            checked: false,
-            body: todo_body,
+            $each: [
+              {
+                _id: new mongoose.Types.ObjectId(),
+                checked: false,
+                body: todo_body,
+              },
+            ],
+            $position: 0,
           },
         },
       },

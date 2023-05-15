@@ -36,7 +36,21 @@ const Todo = () => {
     },
     {
       onSuccess: (data, variables, context) => {
+        queryClient.setQueryData(["todos"], data.data);
         queryClient.invalidateQueries(["todos"]);
+      },
+    }
+  );
+
+  const search = useMutation(
+    async (searchText) => {
+      return await axiosAuth.current.get("/todo", {
+        params: { search: searchText },
+      });
+    },
+    {
+      onSuccess: (data, variables, context) => {
+        queryClient.setQueryData(["todos"], data);
       },
     }
   );
@@ -55,7 +69,7 @@ const Todo = () => {
   return (
     <div className="todo-page">
       <div className="center-box">
-        <SearchBar />
+        <SearchBar onSearch={(text) => search.mutate(text)} timeout={100} />
         <TodoForm
           onFinish={(data) => addTodo.mutate({ todo_body: data.body })}
         />
