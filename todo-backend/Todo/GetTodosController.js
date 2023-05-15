@@ -10,9 +10,14 @@ import mongoose from "mongoose";
 
 const GetTodos = async (req, res, next) => {
   try {
-    const todos = (
-      await Todo.findOne({ user_id: req.user.id }).select("todo_list -_id")
-    )["todo_list"];
+    const searchText = req.params.search;
+    const todoDocument = await Todo.findOne({ user_id: req.user.id }).select(
+      "todo_list -_id"
+    );
+    const todos = todoDocument ? todoDocument["todo_list"] : [];
+    if (searchText) {
+      todos = todos.filter((item) => item.body.includes(searchText));
+    }
     res.status(StatusCodes.OK).json(todos);
   } catch (err) {
     next(err);
