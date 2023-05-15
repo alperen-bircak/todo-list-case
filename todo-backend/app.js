@@ -18,7 +18,7 @@ const baseUrl = process.env.BASE_URL || "/api/v1";
 app.use(baseUrl, router);
 
 app.use((err, req, res, next) => {
-  console.error(err?.stack ? err?.stack : "Error: " + Object.toString(err));
+  console.error(err?.stack ? err?.stack : "Error: " + JSON.stringify(err));
 
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";

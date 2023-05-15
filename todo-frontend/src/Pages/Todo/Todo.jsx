@@ -32,7 +32,7 @@ const Todo = () => {
 
   const addTodo = useMutation(
     async (todo) => {
-      return await axiosAuth.current.post("/todo", todo);
+      return await axiosAuth.current.post("/todo", { todo: todo });
     },
     {
       onSuccess: (data, variables, context) => {
@@ -69,9 +69,7 @@ const Todo = () => {
     <div className="todo-page">
       <div className="center-box">
         <SearchBar onSearch={(text) => search.mutate(text)} timeout={100} />
-        <TodoForm
-          onFinish={(data) => addTodo.mutate({ todo_body: data.body })}
-        />
+        <TodoForm onFinish={(data) => addTodo.mutate(data)} />
 
         <div className="todo-container">
           {data?.data?.map((item) => (

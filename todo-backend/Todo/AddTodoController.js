@@ -10,12 +10,12 @@ import mongoose from "mongoose";
 
 const AddTodo = async (req, res, next) => {
   try {
-    const { todo_body } = req.body;
-    if (!todo_body) {
-      throw Error(StatusCodes.BAD_REQUEST, "Todo body is required");
+    const { todo } = req.body;
+    if (!todo) {
+      throw Error(StatusCodes.BAD_REQUEST, "Todo is required");
     }
 
-    const todo = await Todo.findOneAndUpdate(
+    const todoDoc = await Todo.findOneAndUpdate(
       { user_id: req.user._id },
       {
         $push: {
@@ -24,7 +24,7 @@ const AddTodo = async (req, res, next) => {
               {
                 _id: new mongoose.Types.ObjectId(),
                 checked: false,
-                body: todo_body,
+                ...todo,
               },
             ],
             $position: 0,
@@ -37,7 +37,7 @@ const AddTodo = async (req, res, next) => {
       }
     );
 
-    res.status(StatusCodes.OK).json(todo);
+    res.status(StatusCodes.OK).json(todoDoc);
   } catch (err) {
     next(err);
   }
