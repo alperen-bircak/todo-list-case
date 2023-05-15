@@ -12,11 +12,23 @@ const TodoView = ({ todo, instance }) => {
 
   const deleteItem = useMutation(
     async () => {
-      return instance.delete("/todo", { params: { todo_id: todo._id } });
+      return await instance.delete("/todo", { params: { todo_id: todo._id } });
     },
     {
       onSuccess: (data, variables, context) => {
-        queryClient.setQueryData(["todos"], data);
+        queryClient.setQueryData(["todos"], data.data);
+      },
+    }
+  );
+
+  const modifyItem = useMutation(
+    async (todoData) => {
+      return await instance.put("/todo", { todo: { ...todo, ...todoData } });
+    },
+    {
+      onSuccess: (data, variables, context) => {
+        queryClient.setQueryData(["todos"], data.data);
+        setEdit(false);
       },
     }
   );
@@ -25,7 +37,10 @@ const TodoView = ({ todo, instance }) => {
     return (
       <ClickAwayListener onClickAway={() => setEdit(false)}>
         <div className="todo-view">
-          <TodoForm />
+          <TodoForm
+            onFinish={(data) => modifyItem.mutate(data)}
+            initialValues={todo}
+          />
         </div>
       </ClickAwayListener>
     );

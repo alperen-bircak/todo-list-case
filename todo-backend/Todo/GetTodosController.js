@@ -13,11 +13,11 @@ const GetTodos = async (req, res, next) => {
     const todoDocument = await Todo.findOne({ user_id: req.user.id }).select(
       "todo_list -_id"
     );
-    let todos = todoDocument ? todoDocument["todo_list"] : [];
+    let todo_list = todoDocument ? todoDocument["todo_list"] : [];
     if (searchText) {
-      todos = todos.filter((item) => item.body.includes(searchText));
+      todo_list = todo_list.filter((item) => item.body.includes(searchText));
     }
-    res.status(StatusCodes.OK).json(todos);
+    res.status(StatusCodes.OK).json(todo_list);
   } catch (err) {
     next(err);
   }

@@ -51,7 +51,7 @@ const Todo = () => {
     },
     {
       onSuccess: (data, variables, context) => {
-        queryClient.setQueryData(["todos"], data);
+        queryClient.setQueryData(["todos"], data.data);
       },
     }
   );

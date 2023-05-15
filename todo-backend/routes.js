@@ -14,6 +14,6 @@ router.post("/login", Login);
 router.post("/todo", Auth, AddTodo);
 router.get("/todo", Auth, GetTodos);
 router.delete("/todo", Auth, DeleteTodo);
-router.put("/todo", ModifyTodo);
+router.put("/todo", Auth, ModifyTodo);
 
 export default router;
