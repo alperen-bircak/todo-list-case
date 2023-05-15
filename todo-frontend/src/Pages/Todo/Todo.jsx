@@ -12,6 +12,8 @@ import axios from "axios";
 import "./Todo.scss";
 import TodoView from "../../Components/TodoView/TodoView";
 import TodoForm from "../../Components/TodoForm/TodoForm";
+import { Input } from "antd";
+import SearchBar from "../../Components/SearchBar/SearchBar";
 
 const Todo = () => {
   const [cookies] = useCookies(["jwt-token"]);
@@ -20,7 +22,7 @@ const Todo = () => {
   const queryClient = useQueryClient();
 
   const { isLoading, isError, data, error } = useQuery({
-    queryKey: "todos",
+    queryKey: ["todos"],
     queryFn: async () => {
       return await axios.get(getAPIUrl() + "/todo", {
         headers: { Authorization: "Bearer " + cookies.jwt_token },
@@ -34,7 +36,7 @@ const Todo = () => {
     },
     {
       onSuccess: (data, variables, context) => {
-        queryClient.invalidateQueries("todos");
+        queryClient.invalidateQueries(["todos"]);
       },
     }
   );
@@ -52,12 +54,17 @@ const Todo = () => {
 
   return (
     <div className="todo-page">
-      <TodoForm onFinish={(data) => addTodo.mutate({ todo_body: data.body })} />
+      <div className="center-box">
+        <SearchBar />
+        <TodoForm
+          onFinish={(data) => addTodo.mutate({ todo_body: data.body })}
+        />
 
-      <div className="todo-container">
-        {data?.data?.map((item) => (
-          <TodoView todo={item} />
-        ))}
+        <div className="todo-container">
+          {data?.data?.map((item) => (
+            <TodoView key={item._id} todo={item} />
+          ))}
+        </div>
       </div>
     </div>
   );
