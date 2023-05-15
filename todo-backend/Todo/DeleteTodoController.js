@@ -29,7 +29,7 @@ const DeleteTodo = async (req, res, next) => {
       }
     );
 
-    res.status(StatusCodes.OK).json(todo);
+    res.status(StatusCodes.OK).json(todo.todo_list);
   } catch (err) {
     next(err);
   }

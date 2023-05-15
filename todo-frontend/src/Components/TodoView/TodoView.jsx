@@ -16,7 +16,7 @@ const TodoView = ({ todo, instance }) => {
     },
     {
       onSuccess: (data, variables, context) => {
-        queryClient.invalidateQueries(["todos"]);
+        queryClient.setQueryData(["todos"], data);
       },
     }
   );

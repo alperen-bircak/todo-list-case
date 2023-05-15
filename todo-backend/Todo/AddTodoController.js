@@ -37,7 +37,7 @@ const AddTodo = async (req, res, next) => {
       }
     );
 
-    res.status(StatusCodes.OK).json(todoDoc);
+    res.status(StatusCodes.OK).json(todoDoc.todo_list);
   } catch (err) {
     next(err);
   }

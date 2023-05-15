@@ -24,9 +24,10 @@ const Todo = () => {
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["todos"],
     queryFn: async () => {
-      return await axios.get(getAPIUrl() + "/todo", {
+      const res = await axios.get(getAPIUrl() + "/todo", {
         headers: { Authorization: "Bearer " + cookies.jwt_token },
       });
+      return res.data;
     },
   });
 
@@ -36,7 +37,8 @@ const Todo = () => {
     },
     {
       onSuccess: (data, variables, context) => {
-        queryClient.invalidateQueries(["todos"]);
+        console.log(data.data);
+        queryClient.setQueryData(["todos"], data.data);
       },
     }
   );
@@ -72,7 +74,7 @@ const Todo = () => {
         <TodoForm onFinish={(data) => addTodo.mutate(data)} />
 
         <div className="todo-container">
-          {data?.data?.map((item) => (
+          {data?.map((item) => (
             <TodoView key={item._id} todo={item} instance={axiosAuth.current} />
           ))}
         </div>

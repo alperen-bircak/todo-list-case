@@ -2,7 +2,6 @@ import express from "express";
 import Auth from "./Authentication/AuthMiddleware.js";
 import Login from "./Authentication/LoginController.js";
 import Register from "./Authentication/RegisterController.js";
-import HelloWorld from "./Test/TestController.js";
 import AddTodo from "./Todo/AddTodoController.js";
 import GetTodos from "./Todo/GetTodosController.js";
 import DeleteTodo from "./Todo/DeleteTodoController.js";
