@@ -5,7 +5,7 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { getAPIUrl } from "../../Utilities/UtilityFunctions";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 const Login = () => {
   const [errorText, setErrorText] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["jwt_token"]);
@@ -66,6 +66,9 @@ const Login = () => {
             </Button>
           </Form.Item>
         </Form>
+        <span className="register-text">
+          Not registered yet? <NavLink to="/register">Register</NavLink>
+        </span>
       </div>
     </div>
   );

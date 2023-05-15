@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import Login from "./Pages/Login/Login";
+import Register from "./Pages/Register/Register";
 import Todo from "./Pages/Todo/Todo";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/todo",

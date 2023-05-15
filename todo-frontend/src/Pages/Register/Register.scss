@@ -1,6 +1,6 @@
 @import "src/global";
 
-.login-page {
+.register-page {
     @extend %page;
     justify-content: center;
 
@@ -11,28 +11,14 @@
         background-color: $color-light;
         border-radius: $border-radius;
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .login-form {
+        .register-form {
             display: flex;
             flex-direction: column;
             align-items: center;
 
-            .login-error {
+            .register-error {
                 height: 2em;
                 color: red;
-            }
-        }
-
-        .register-text {
-            text-align: center;
-            font-size: 0.9em;
-            color: gray;
-
-            a {
-                color: blue
             }
         }
     }
