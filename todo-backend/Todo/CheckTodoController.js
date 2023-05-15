@@ -10,9 +10,9 @@ import mongoose from "mongoose";
 
 const CheckTodo = async (req, res, next) => {
   try {
-    const { todo_id, check } = req.query;
-    if (!todo) {
-      throw Error(StatusCodes.BAD_REQUEST, "Todo is required");
+    const { todo_id, check } = req.body;
+    if (!todo_id) {
+      throw Error(StatusCodes.BAD_REQUEST, "Todo id is required");
     }
 
     const todoDoc = await Todo.findOne({ user_id: req.user._id });

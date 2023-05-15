@@ -16,10 +16,19 @@ import { Input } from "antd";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 
 const Todo = () => {
-  const [cookies] = useCookies(["jwt-token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["jwt-token"]);
   const axiosAuth = useRef(axios);
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const handleError = (error) => {
+    if (error.response.status == 401) {
+      navigate("/login");
+      removeCookie("jwt-token", {
+        path: "/",
+      });
+    }
+  };
 
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["todos"],
@@ -28,6 +37,13 @@ const Todo = () => {
         headers: { Authorization: "Bearer " + cookies.jwt_token },
       });
       return res.data;
+    },
+    retry: (failureCount, error) => {
+      if (error.response.status == 401) {
+        handleError(error);
+      } else if (failureCount > 3) {
+        throw error;
+      }
     },
   });
 
@@ -40,6 +56,7 @@ const Todo = () => {
         console.log(data.data);
         queryClient.setQueryData(["todos"], data.data);
       },
+      onError: handleError,
     }
   );
 
@@ -53,6 +70,8 @@ const Todo = () => {
       onSuccess: (data, variables, context) => {
         queryClient.setQueryData(["todos"], data.data);
       },
+
+      onError: handleError,
     }
   );
 
@@ -75,7 +94,24 @@ const Todo = () => {
 
         <div className="todo-container">
           {data?.todo_list?.map((item) => (
-            <TodoView key={item._id} todo={item} instance={axiosAuth.current} />
+            <TodoView
+              key={item._id}
+              todo={item}
+              instance={axiosAuth.current}
+              checked={false}
+              onError={handleError}
+            />
+          ))}
+        </div>
+        <div className="done-container">
+          {data?.done_list?.map((item) => (
+            <TodoView
+              key={item._id}
+              todo={item}
+              instance={axiosAuth.current}
+              checked={true}
+              onError={handleError}
+            />
           ))}
         </div>
       </div>
