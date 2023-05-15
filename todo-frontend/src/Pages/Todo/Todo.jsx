@@ -74,7 +74,7 @@ const Todo = () => {
         <TodoForm onFinish={(data) => addTodo.mutate(data)} />
 
         <div className="todo-container">
-          {data?.map((item) => (
+          {data?.todo_list?.map((item) => (
             <TodoView key={item._id} todo={item} instance={axiosAuth.current} />
           ))}
         </div>

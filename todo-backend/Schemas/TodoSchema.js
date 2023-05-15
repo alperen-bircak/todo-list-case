@@ -16,8 +16,16 @@ const todoSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      checked: {
-        type: Boolean,
+    },
+  ],
+  done_list: [
+    {
+      _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+      },
+      body: {
+        type: String,
         required: true,
       },
     },

@@ -26,7 +26,7 @@ const ModifyTodo = async (req, res, next) => {
     });
 
     await todoDoc.save();
-    res.status(StatusCodes.OK).json(todoDoc.todo_list);
+    res.status(StatusCodes.OK).json(todoDoc);
   } catch (err) {
     next(err);
   }
