@@ -28,8 +28,10 @@ services:
     depends_on:
       - mongo
     environment: 
-      DATABASE_URL: mongodb://root:case@mongo:27017/
+      DATABASE_URL: mongodb://backendUser:someoneherelikespotatoes@mongo:27017/todo
       PORT: 3001
+      JWT_EXPIRATION_TIME: 1 day
+      JWT_SECRET: ThisKeyWouldntBeHere
   
   frontend:
     build: ./todo-frontend
