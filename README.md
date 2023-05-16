@@ -37,3 +37,13 @@ docker-compose down
 ```
 
 This will stop and remove all containers, networks, and volumes associated with the application.
+
+## Features
+* User Register
+* User Login
+* Add todos
+* Remove todos
+* Reorder todos by dragging them around
+* Check todos
+* Search todos
+* Edit todos
