@@ -30,13 +30,37 @@ This will start the application and output the logs to your terminal. After star
 
 ## Stopping the Application
 
-To stop the application, simply press `Ctrl + C` in your terminal. Alternatively, you can run the following command:
+You can run the following command to stop the application, keep in mind that this will erase the database (This is not doe to using a fake database, the docker image is not configured to be persistent between runs).:
 
 ```
 docker-compose down
 ```
 
 This will stop and remove all containers, networks, and volumes associated with the application.
+
+## Technologies Used
+
+## General
+* Docker
+* Docker Compose
+
+### Backend
+* MongoDB
+* Mongoose
+* Node
+* Express
+* Crypto
+* Jose
+
+### Frontend
+* React
+* Antd
+* React Router
+* React Beautiful Dnd
+* React Cookies
+* Axios
+* Sass
+* React Query
 
 ## Implemented Features
 * User Register
