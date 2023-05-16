@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Login.scss";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -11,10 +11,24 @@ const Login = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["jwt_token"]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (cookies.jwt_token && cookies.jwt_token !== "none") {
+      navigate("/todo");
+    }
+  }, [cookies]);
+
   const onSubmit = async (values) => {
     try {
+      const date = new Date();
+      date.setDate(date.getDate() + 1);
+
       const res = await axios.post(getAPIUrl() + "/login", values);
       setCookie("jwt_token", res.data.token, {
+        path: "/",
+        sameSite: true,
+        expires: date,
+      });
+      setCookie("username", values.username, {
         path: "/",
         sameSite: true,
       });

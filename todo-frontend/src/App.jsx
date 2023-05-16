@@ -10,6 +10,8 @@ import "./App.scss";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Todo from "./Pages/Todo/Todo";
+import { useState } from "react";
+import React from "react";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +21,7 @@ const router = createBrowserRouter([
     loader: ({ request }) => {
       const url = new URL(request.url);
       if (url.pathname === "/") {
-        return redirect("/todo");
+        return redirect("/login");
       }
     },
   },
@@ -37,11 +39,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+export const UserContext = React.createContext();
+
 function App() {
+  const usernameState = useState("");
   return (
     <QueryClientProvider client={queryClient}>
       <CookiesProvider>
-        <RouterProvider router={router} />
+        <UserContext.Provider value={usernameState}>
+          <RouterProvider router={router} />
+        </UserContext.Provider>
       </CookiesProvider>
     </QueryClientProvider>
   );

@@ -19,7 +19,7 @@ const SearchBar = ({ onSearch, timeout = 1000 }) => {
   return (
     <>
       <Input
-        placeholder="input search text"
+        placeholder="Input search text"
         allowClear
         onChange={(e) => {
           startTimeout(e.target.value);

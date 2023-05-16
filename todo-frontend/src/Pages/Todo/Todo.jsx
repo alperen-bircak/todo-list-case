@@ -12,9 +12,11 @@ import axios from "axios";
 import "./Todo.scss";
 import TodoView from "../../Components/TodoView/TodoView";
 import TodoForm from "../../Components/TodoForm/TodoForm";
-import { Input, notification } from "antd";
+import { Collapse, Input, notification } from "antd";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
+import TopBar from "../../Components/TopBar/TopBar";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 
 const Todo = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["jwt-token"]);
@@ -24,12 +26,13 @@ const Todo = () => {
 
   const handleError = (error) => {
     if (error.response?.status == 401) {
+      setCookie("jwt_token", "none", {
+        path: "/",
+        sameSite: true,
+      });
       navigate("/login");
       notification.error({
         message: "Please login again.",
-      });
-      removeCookie("jwt-token", {
-        path: "/",
       });
     } else {
       notification.error({
@@ -84,7 +87,7 @@ const Todo = () => {
   );
 
   useEffect(() => {
-    if (!cookies.jwt_token) {
+    if (!cookies.jwt_token || cookies.jwt_token === "none") {
       navigate("/login");
     } else {
       axiosAuth.current = axios.create({
@@ -128,9 +131,21 @@ const Todo = () => {
   );
   return (
     <div className="todo-page">
+      <div className="top-bar-container">
+        <TopBar />
+      </div>
       <div className="center-box">
         <SearchBar onSearch={(text) => search.mutate(text)} timeout={100} />
-        <TodoForm onFinish={(data) => addTodo.mutate(data)} />
+
+        <Collapse
+          expandIcon={({ isActive }) =>
+            isActive ? <MinusOutlined /> : <PlusOutlined />
+          }
+        >
+          <Collapse.Panel header={<>Add Todo</>} key="1">
+            <TodoForm onFinish={(data) => addTodo.mutate(data)} />
+          </Collapse.Panel>
+        </Collapse>
 
         <DragDropContext enableDefaultSensors={true} onDragEnd={onDragEnd}>
           <Droppable droppableId="todo">
