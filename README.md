@@ -40,7 +40,7 @@ This will stop and remove all containers, networks, and volumes associated with 
 
 ## Technologies Used
 
-## General
+### General
 * Docker
 * Docker Compose
 
