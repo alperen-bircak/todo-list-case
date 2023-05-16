@@ -38,7 +38,7 @@ docker-compose down
 
 This will stop and remove all containers, networks, and volumes associated with the application.
 
-## Features
+## Implemented Features
 * User Register
 * User Login
 * Add todos
@@ -47,3 +47,7 @@ This will stop and remove all containers, networks, and volumes associated with 
 * Check todos
 * Search todos
 * Edit todos
+
+## Features not Implemented
+* Add thumbnail to todo
+* Add attachments to todo
