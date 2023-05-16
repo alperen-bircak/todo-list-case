@@ -22,7 +22,7 @@ services:
 
   backend:
     build: ./todo-backend
-    command: npm run dev
+    command: npm run start
     ports:
       - "3001:3001"
     depends_on:
@@ -35,9 +35,10 @@ services:
   
   frontend:
     build: ./todo-frontend
-    command: npx serve build
+    command: npx serve -s build
     ports:
       - "3000:3000"
     depends_on:
       - backend
+      
       
