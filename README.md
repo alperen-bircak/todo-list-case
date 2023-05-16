@@ -22,7 +22,7 @@ This might take a while!
 Once the image has been built, you can start the application with the following command:
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 This will start the application and output the logs to your terminal. After starting the application, you can acces the web page on your browser at [http://localhost:3000](http://localhost:3000).
