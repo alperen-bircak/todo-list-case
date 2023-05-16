@@ -43,7 +43,7 @@ This will stop and remove all containers, networks, and volumes associated with 
 * User Login
 * Add todos
 * Remove todos
-* Reorder todos by dragging them around
+* Re-order todos by dragging them around
 * Check todos
 * Search todos
 * Edit todos
