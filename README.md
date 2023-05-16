@@ -49,5 +49,6 @@ This will stop and remove all containers, networks, and volumes associated with 
 * Edit todos
 
 ## Features not Implemented
+    I couldn't complete these features in time:
 * Add thumbnail to todo
 * Add attachments to todo
