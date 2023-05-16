@@ -25,7 +25,7 @@ Once the image has been built, you can start the application with the following 
 docker-compose up
 ```
 
-This will start the application and output the logs to your terminal. After starting the application, you can acces the web page on your browser at (http://localhost:3000)[http://localhost:3000].
+This will start the application and output the logs to your terminal. After starting the application, you can acces the web page on your browser at [http://localhost:3000](http://localhost:3000).
 
 
 ## Stopping the Application
